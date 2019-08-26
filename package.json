@@ -1,0 +1,26 @@
+{
+  "name": "practice-gulp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp dev",
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddock4you/practice-gulp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ddock4you/practice-gulp/issues"
+  },
+  "homepage": "https://github.com/ddock4you/practice-gulp#readme",
+  "devDependencies": {
+    "eslint": "^6.2.2",
+    "gulp": "^4.0.2"
+  },
+  "dependencies": {}
+}
