@@ -19,12 +19,12 @@
   },
   "homepage": "https://github.com/ddock4you/practice-gulp#readme",
   "devDependencies": {
-    "eslint": "^6.2.2",
-    "gulp": "^4.0.2",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "@babel/register": "^7.5.5"
+    "@babel/register": "^7.5.5",
+    "eslint": "^6.2.2",
+    "gulp": "^4.0.2",
+    "gulp-pug": "^4.0.1"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
