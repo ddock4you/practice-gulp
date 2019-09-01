@@ -10,6 +10,8 @@ import image from "gulp-image";
 import sass from "gulp-sass";
 import autoprefixer from "gulp-autoprefixer";
 import csso from "gulp-csso";
+import bro from "gulp-bro";
+import babelify from "babelify";
 
 sass.compiler = require("node-sass");
 
@@ -27,6 +29,12 @@ const routes = {
     sass: {
         src: "src/sass/style.scss",
         dest: "build/css"
+    },
+
+    js: {
+        watch: "src/**/*.js",
+        src: "src/js/main.js",
+        dest: "build/js"
     }
 }
 
@@ -50,11 +58,9 @@ const watch = () => {
     gulp.watch(routes.pug.watch, pug);
     gulp.watch(routes.img.src, img);
     gulp.watch(routes.sass.src, styles);
+    gulp.watch(routes.js.watch, js);
 }
 // 파일 변동 있을 때 마다 pug와 img 함수를 실행
-
-
-
 
 
 const img = () => 
@@ -88,10 +94,20 @@ const styles = () =>
 // https://twitter.com/browserslist
 
 
-// tesk 과정을 분류
+const js = () => 
+        gulp
+            .src(routes.js.src)
+            .pipe(bro({
+                transform: [
+                    babelify.configure({presets: ['@babel/preset-env']})
+                ]
+            }))
+            .pipe(gulp.dest(routes.js.dest));
+
+// tesk 과정을 분류 ***********************************************************
 const prepare = gulp.series([clean, img]);
 
-const assets = gulp.series([pug, styles]);
+const assets = gulp.series([pug, styles, js]);
 
 const openDev = gulp.series([webserver, watch]);
 
