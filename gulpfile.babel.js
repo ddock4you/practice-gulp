@@ -54,6 +54,9 @@ const watch = () => {
 // 파일 변동 있을 때 마다 pug와 img 함수를 실행
 
 
+
+
+
 const img = () => 
     gulp
         .src(routes.img.src)
@@ -67,10 +70,23 @@ const styles = () =>
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             overrideBrowserslist: ['last 3 version']
+           //  browsers: ['last 3 version'] 에러 뜸
         }))
         .pipe(csso())
         .pipe(gulp.dest(routes.sass.dest));
     
+// Replace Autoprefixer browsers option to Browserslist config.
+// Use browserslist key in package.json or .browserslistrc file.
+
+// Using browsers option cause some error. Browserslist config 
+// can be used for Babel, Autoprefixer, postcss-normalize and other tools.
+
+// If you really need to use option, rename it to overrideBrowserslist.
+
+// Learn more at:
+// https://github.com/browserslist/browserslist#readme
+// https://twitter.com/browserslist
+
 
 // tesk 과정을 분류
 const prepare = gulp.series([clean, img]);
