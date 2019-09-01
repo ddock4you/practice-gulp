@@ -31,6 +31,8 @@
   },
   "dependencies": {
     "del": "^5.1.0",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-csso": "^3.0.1",
     "gulp-img": "0.0.0",
     "gulp-webserver": "^0.9.1"
   }

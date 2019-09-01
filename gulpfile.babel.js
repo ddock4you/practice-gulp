@@ -8,6 +8,8 @@ import image from "gulp-image";
 // npm i gulp-image -D
 // gulp-image 설치 후 실행을 하면 취약점이 발견됐다면서 
 import sass from "gulp-sass";
+import autoprefixer from "gulp-autoprefixer";
+import csso from "gulp-csso";
 
 sass.compiler = require("node-sass");
 
@@ -63,6 +65,10 @@ const styles = () =>
     gulp
         .src(routes.sass.src)
         .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer({
+            overrideBrowserslist: ['last 3 version']
+        }))
+        .pipe(csso())
         .pipe(gulp.dest(routes.sass.dest));
     
 
