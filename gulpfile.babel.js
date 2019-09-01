@@ -7,7 +7,9 @@ import ws from 'gulp-webserver';
 import image from "gulp-image";
 // npm i gulp-image -D
 // gulp-image 설치 후 실행을 하면 취약점이 발견됐다면서 
+import sass from "gulp-sass";
 
+sass.compiler = require("node-sass");
 
 const routes = {
     pug: {
@@ -18,6 +20,11 @@ const routes = {
     img: {
         src: "src/img/*",
         dest: "build/img"
+    },
+
+    sass: {
+        src: "src/sass/style.scss",
+        dest: "build/css"
     }
 }
 
@@ -40,6 +47,7 @@ const webserver = () =>
 const watch = () => {
     gulp.watch(routes.pug.watch, pug);
     gulp.watch(routes.img.src, img);
+    gulp.watch(routes.sass.src, styles);
 }
 // 파일 변동 있을 때 마다 pug와 img 함수를 실행
 
@@ -51,10 +59,17 @@ const img = () =>
         .pipe(gulp.dest(routes.img.dest));
 
 
+const styles = () =>
+    gulp
+        .src(routes.sass.src)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(routes.sass.dest));
+    
+
 // tesk 과정을 분류
 const prepare = gulp.series([clean, img]);
 
-const assets = gulp.series([pug]);
+const assets = gulp.series([pug, styles]);
 
 const openDev = gulp.series([webserver, watch]);
 
