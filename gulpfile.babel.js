@@ -99,7 +99,8 @@ const js = () =>
             .src(routes.js.src)
             .pipe(bro({
                 transform: [
-                    babelify.configure({presets: ['@babel/preset-env']})
+                    babelify.configure({presets: ['@babel/preset-env']}),
+                    [ 'uglifyify', { global: true } ]
                 ]
             }))
             .pipe(gulp.dest(routes.js.dest));
