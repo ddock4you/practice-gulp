@@ -12,6 +12,7 @@ import autoprefixer from "gulp-autoprefixer";
 import csso from "gulp-csso";
 import bro from "gulp-bro";
 import babelify from "babelify";
+import ghPages from "gulp-gh-pages";
 
 sass.compiler = require("node-sass");
 
@@ -106,16 +107,24 @@ const js = () =>
             }))
             .pipe(gulp.dest(routes.js.dest));
 
+const gh = () =>
+    gulp
+        .src('build/**/*')
+        .pipe(ghPages());
+
 // tesk 과정을 분류 ***********************************************************
+
 const prepare = gulp.series([clean, img]);
 
 const assets = gulp.series([pug, styles, js]);
 
-const openDev = gulp.series([webserver, watch]);
+const live = gulp.parallel([webserver, watch]);
 
 
 
-export const dev = gulp.series([prepare, assets, openDev]);
+export const build = gulp.series([prepare, assets]);
+export const dev = gulp.series([build, live]);
+export const deploy = gulp.series([build, gh]);
 
 /*
     개선사항
