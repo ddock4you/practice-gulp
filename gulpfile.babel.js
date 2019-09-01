@@ -101,6 +101,7 @@ const js = () =>
                 transform: [
                     babelify.configure({presets: ['@babel/preset-env']}),
                     [ 'uglifyify', { global: true } ]
+                    // uglifyify는 import 시키지 않았는데 작동됨.
                 ]
             }))
             .pipe(gulp.dest(routes.js.dest));
